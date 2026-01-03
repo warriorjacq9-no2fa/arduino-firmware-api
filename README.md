@@ -1,0 +1,1 @@
+For use with my [HID Keyboard firmware](https://github.com/warriorjacq9-no2fa/arduino-firmware)
