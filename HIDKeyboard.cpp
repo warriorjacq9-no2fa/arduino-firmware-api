@@ -1,6 +1,6 @@
 #include "HIDKeyboard.h"
 
-keypress_t Keyboard::fromChar(char c) {
+keypress_t _Keyboard::fromChar(char c) {
     uint8_t modifier = 0;
     uint8_t scancode = 0;
 
@@ -71,7 +71,7 @@ keypress_t Keyboard::fromChar(char c) {
     return ret;
 }
 
-void Keyboard::press(uint8_t key, uint8_t modifier) {
+void _Keyboard::press(uint8_t key, uint8_t modifier = MOD_NONE) {
     Serial.write(CMD_KBD_REPORT);
     Serial.write(modifier);
 
@@ -83,7 +83,7 @@ void Keyboard::press(uint8_t key, uint8_t modifier) {
     for(int i = 0; i < 6; i++) Serial.write(this->keys[i]);
 }
 
-void Keyboard::press(keypress_t key) {
+void _Keyboard::press(keypress_t key) {
     Serial.write(CMD_KBD_REPORT);
     Serial.write(key.modifier);
 
@@ -95,7 +95,7 @@ void Keyboard::press(keypress_t key) {
     for(int i = 0; i < 6; i++) Serial.write(this->keys[i]);
 }
 
-void Keyboard::release(uint8_t key, uint8_t modifier) {
+void _Keyboard::release(uint8_t key, uint8_t modifier = MOD_NONE) {
     Serial.write(CMD_KBD_REPORT);
     Serial.write(modifier);
 
@@ -115,7 +115,7 @@ void Keyboard::release(uint8_t key, uint8_t modifier) {
     for(int i = 0; i < 6; i++) Serial.write(this->keys[i]);
 }
 
-void Keyboard::release(keypress_t key) {
+void _Keyboard::release(keypress_t key) {
     Serial.write(CMD_KBD_REPORT);
     Serial.write(key.modifier);
 
@@ -135,7 +135,7 @@ void Keyboard::release(keypress_t key) {
     for(int i = 0; i < 6; i++) Serial.write(this->keys[i]);
 }
 
-void Keyboard::write(const char* s) {
+void _Keyboard::write(const char* s) {
     char c;
     
     Serial.write(CMD_KBD_STRING);
@@ -148,7 +148,7 @@ void Keyboard::write(const char* s) {
     }
 }
 
-void Keyboard::write(char c) {
+void _Keyboard::write(char c) {
     Serial.write(CMD_KBD_STRING);
     Serial.write(2);
     keypress_t key = fromChar(c);

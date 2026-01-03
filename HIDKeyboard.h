@@ -17,12 +17,12 @@ typedef struct {
     uint8_t keys[6];
 } report_t;
 
-class Keyboard {
+class _Keyboard {
     public:
         keypress_t fromChar(char c);
-        void press(uint8_t key, uint8_t modifier);
+        void press(uint8_t key, uint8_t modifier = MOD_NONE);
         void press(keypress_t key);
-        void release(uint8_t key, uint8_t modifier);
+        void release(uint8_t key, uint8_t modifier = MOD_NONE);
         void release(keypress_t key);
         void write(const char *s);
         void write(char c);
@@ -31,5 +31,7 @@ class Keyboard {
         uint8_t keys[6] = {0};
         uint8_t index = 0;
 };
+
+static _Keyboard Keyboard;
 
 #endif

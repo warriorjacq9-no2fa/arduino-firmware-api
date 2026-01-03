@@ -1,6 +1,8 @@
 #ifndef HK_KEYS_H
 #define HK_KEYS_H
 
+#define MOD_NONE        0
+
 #define MOD_LEFTCTRL    0x01
 #define MOD_LEFTSHIFT   0x02
 #define MOD_LEFTALT     0x04
