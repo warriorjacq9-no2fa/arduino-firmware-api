@@ -64,10 +64,9 @@ keypress_t _Keyboard::fromChar(char c) {
                 scancode = KEY_SPACE; break; // Default to space
         }
     }
-    keypress_t ret = {
-        .key = scancode,
-        .modifier = modifier
-    };
+    keypress_t ret;
+    ret.key = scancode;
+    ret.modifier = modifier;
     return ret;
 }
 
