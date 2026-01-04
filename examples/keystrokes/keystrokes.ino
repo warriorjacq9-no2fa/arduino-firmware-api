@@ -14,7 +14,7 @@ void setup() {
   delay(1000); // Wait for serial to initialize
 
   // CTRL SHIFT ESC
-  Keyboard.press(KEY_ESC, MOD_LEFTCTRL | MOD_LEFTSHIFT);
+  Keyboard.press(KEY_ESC, MOD_RIGHTCTRL | MOD_RIGHTSHIFT);
   delay(100);
   Keyboard.release(KEY_ESC);
 }
