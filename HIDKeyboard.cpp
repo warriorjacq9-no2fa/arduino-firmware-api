@@ -136,14 +136,33 @@ void _Keyboard::release(keypress_t key) {
 
 void _Keyboard::write(const char* s) {
     char c;
+    char prev = '\0';  // Track previous character
     
     Serial.write(CMD_KBD_STRING);
-    Serial.write(strlen(s) * 2);
+    
+    // Count total keypresses needed (with releases for repeated keys)
+    uint8_t count = 0;
+    const char* temp = s;
+    while(*temp) {
+        if(*temp == prev) count += 2;  // Need release + press for repeat
+        count += 2;  // Normal press
+        prev = *temp++;
+    }
+    Serial.write(count);
 
+    prev = '\0';
     while((c = *s++)) {
         keypress_t key = fromChar(c);
+        
+        // If same key as previous, send a release (0, 0) first
+        if(c == prev) {
+            Serial.write((uint8_t)0);  // No modifier
+            Serial.write((uint8_t)0);  // No key (release)
+        }
+        
         Serial.write(key.modifier);
         Serial.write(key.key);
+        prev = c;
     }
 }
 
